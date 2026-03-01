@@ -38,22 +38,6 @@ foreach ($products as $p) {
     ];
 }
 
-if (!empty($search)) {
-    $filtered = [];
-    foreach ($newProducts as $p) {
-        if (strpos(mb_strtolower($p['name']), mb_strtolower($search)) !== false) {
-            $filtered[] = $p;
-            continue;
-        }
-        foreach ($p['tags'] as $tag) {
-            if (strpos(mb_strtolower($tag), mb_strtolower($search)) !== false) {
-                $filtered[] = $p;
-                break;
-            }
-        }
-    }
-    $newProducts = $filtered;
-}
 
 if (is_numeric($minPrice) && $minPrice > 0) {
     $filtered = [];
@@ -113,7 +97,6 @@ function url($params) {
 
 <form method="GET">
     <p>
-        Поиск: <input type="text" name="q" value="<?php echo e($search); ?>">
         Цена от: <input type="number" name="min" value="<?php echo e($minPrice); ?>">
         до: <input type="number" name="max" value="<?php echo e($maxPrice); ?>">
         
